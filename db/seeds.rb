@@ -7,13 +7,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 
 account = Account.new(
   name: "test_account"
 )
 
-account.build_owner.tap do |owner|
-  owner.assign_attributes(name: "Robert Carter", email: "kakulo83@gmail.com")
-end
 
-account.save!
+10.times do
+  User.create(name: Faker::Name.name,
+              email: Faker::Internet.email,
+              account: account)
+end
