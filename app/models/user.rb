@@ -5,8 +5,9 @@
 #  id         :bigint(8)        not null, primary key
 #  name       :string
 #  email      :string
-#  account_id :bigint(8)
-#  extra      :jsonb            not null
+#  account_id :integer
+#  role       :integer          default("user")
+#  integer    :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -21,5 +22,4 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :user
   end
-
 end

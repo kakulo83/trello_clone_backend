@@ -9,8 +9,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
+owner = User.create(name: "Mr Owner", email: "owner@test.net", role: :owner)
+
 account = Account.new(
-  name: "test_account"
+  name: "test_account",
+  owner: owner
 )
 
 

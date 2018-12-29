@@ -5,8 +5,9 @@
 #  id         :bigint(8)        not null, primary key
 #  name       :string
 #  email      :string
-#  account_id :bigint(8)
-#  extra      :jsonb            not null
+#  account_id :integer
+#  role       :integer          default("user")
+#  integer    :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -15,10 +16,15 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:account) { Account.create!(name: "test_account") }
+  before(:context) do
+    @account = Account.create!(name: "test_account", owner: @owner)
+    @owner = User.create!(name: "Mr Owner", email: "owner@test.net", role: :owner, account_id: @account.id )
+    # admin = User.new(name: "Mr Admin", email: "admin@test.net", account_id: account.id )
+    #board = Board.new(name: "Board 1", account_id: account.id )
+  end
 
-  describe "When the User is not an Owner or Admin" do
-    subject(:user) { User.new(name: "Mr User", email: "user@test.net", account_id: account.id ) }
+  describe "when the User is not an Owner or Admin" do
+    subject(:user) { User.create(name: "Mr User", email: "user@test.net", account_id: @account.id ) }
 
     it 'has a name' do
       expect(subject.name).to eq("Mr User")
@@ -37,10 +43,10 @@ RSpec.describe User, type: :model do
     it { should belong_to(:account) }
   end
 
-  describe "When the user is an Owner" do
-    subject(:owner) { User.new(name: "Mr Owner", email: "owner@test.net", account_id: account.id, role: :owner) }
+  describe "when the user is an Owner" do
+    subject(:owner) { User.create(name: "Mr Owner", email: "owner@test.net", account_id: @account.id, role: :owner) }
 
-    it 'is an admin' do
+    it 'is an owner' do
       expect(subject.owner?).to be true
     end
   end
