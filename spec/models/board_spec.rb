@@ -27,8 +27,4 @@ RSpec.describe Board, type: :model do
   it "has a name", board: true do
     expect(subject.name).to eq("todo")
   end
-
-  it "has many admins", board: true do
-
-  end
 end
