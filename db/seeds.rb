@@ -9,16 +9,26 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-owner = User.create(name: "Mr Owner", email: "owner@test.net", role: :owner)
+account = Account.new(name: "test_account")
 
-account = Account.new(
-  name: "test_account",
-  owner: owner
-)
+owner = User.create(name: "Mr Owner", email: "owner@test.net", role: :owner, account_id: account)
 
+account.owner = owner
+owner.account = account
+
+account.save
+owner.save
 
 10.times do
   User.create(name: Faker::Name.name,
               email: Faker::Internet.email,
               account: account)
 end
+
+board = Board.create(name: "todos", account: account)
+
+admin1 = User.create(name: "Admin1", email: "admin1@test.net", role: :admin, account: account)
+admin2 = User.create(name: "Admin2", email: "admin2@test.net", role: :admin, account: account)
+
+BoardMembership.create(user: admin1, board: board)
+BoardMembership.create(user: admin2, board: board)

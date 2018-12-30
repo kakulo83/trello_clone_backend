@@ -10,8 +10,8 @@
 #
 
 class Account < ApplicationRecord
-  has_many :users, dependent: :destroy
   belongs_to :owner, -> { where role: :owner }, class_name: 'User', optional: true
-
-  #has_many :boards
+  has_many :admins, dependent: :destroy, class_name: 'User'
+  has_many :users, dependent: :destroy
+  has_many :boards, dependent: :destroy
 end

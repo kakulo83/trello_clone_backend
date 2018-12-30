@@ -20,7 +20,7 @@ RSpec.describe Account, type: :model do
   end
 
   it { should have_many(:users) }
-  it { should have_one(:owner) }
+  it { should belong_to(:owner).optional }
   it { should have_many(:admins) }
   it { should have_many(:boards) }
 end

@@ -12,4 +12,10 @@
 class Board < ApplicationRecord
   belongs_to :account
   has_one :owner, through: :account
+  has_many :board_memberships
+  has_many :admins, -> { where(users: { role: "admin" }) },
+    class_name: "User",
+    through: :board_memberships,
+    source: :user
+  has_many :users, through: :board_memberships
 end

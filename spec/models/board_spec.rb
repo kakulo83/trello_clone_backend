@@ -13,18 +13,22 @@ require 'rails_helper'
 
 RSpec.describe Board, type: :model do
 
+  before(:context) do
+    @account = Account.create!(name: "test_account", owner: @owner)
+    @owner = User.create!(name: "Mr Owner", email: "owner@test.net", role: :owner, account_id: @account.id )
+  end
+
+  subject(:board) { Board.create(name: "todo", account: @account) }
+
   it { should belong_to(:account) }
 
-  it { should have_and_belong_to_many(:users) }
+  it { should have_many(:board_memberships) }
 
-  it { should have_one(:team) }
-
-  it 'has a name', board: true do
-
+  it "has a name", board: true do
+    expect(subject.name).to eq("todo")
   end
 
-  it 'has at least one admin' do
+  it "has many admins", board: true do
 
   end
-
 end

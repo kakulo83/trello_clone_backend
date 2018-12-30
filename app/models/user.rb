@@ -14,6 +14,8 @@
 
 class User < ApplicationRecord
   belongs_to :account
+  has_many :board_memberships, dependent: :destroy
+  has_many :boards, through: :board_memberships
 
   enum role: { user: 0, admin: 1, owner: 2 }
 
