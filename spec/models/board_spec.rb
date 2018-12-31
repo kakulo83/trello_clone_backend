@@ -13,10 +13,13 @@ require 'rails_helper'
 
 RSpec.describe Board, type: :model do
 
-  before(:context) do
-    @account = Account.create!(name: "test_account", owner: @owner)
-    @owner = User.create!(name: "Mr Owner", email: "owner@test.net", role: :owner, account_id: @account.id )
-  end
+  let(:account) { Account.create(name: "test_account", owner: owner) }
+  let(:owner)   { User.create(name: "Mr Owner",
+                          email: "owner@test.net",
+                          role: :owner,
+                          account_id: @account.id,
+                          password: "foobar",
+                          password_confirmation: "foobar") }
 
   subject(:board) { Board.create(name: "todo", account: @account) }
 

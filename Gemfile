@@ -16,8 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 4.0'
 gem 'active_model_serializers', '~> 0.10'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -40,6 +39,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
+  gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '4.0.0.rc1'
 end
