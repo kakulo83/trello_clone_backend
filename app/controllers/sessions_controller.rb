@@ -7,20 +7,22 @@ class SessionsController < ActionController::Base
       if user.authenticate(params[:session][:password])
         token = JWTUtil.encode({ user_id: user.id, role: user.role })
         render json: {
-          success: true,
+          status: :ok,
           token: token
         }, status: :ok
       else
         render json: {
-          success: false,
-          errors: ["Password incorrect"]
+          status: 401,
+          errors: ["Password incorrect"],
+          code: "incorrect_password"
         }, status: :unauthorized
       end
     else
       render json: {
-        success: false,
-        errors: ["Cannot find User associated with #{params[:session][:email]}"]
-      }, status: :unauthorized
+        status: 422,
+        errors: ["Cannot find User associated with #{params[:session][:email]}"],
+        code: "user_not_found"
+      }, status: :unprocessable_entity
     end
   end
 
