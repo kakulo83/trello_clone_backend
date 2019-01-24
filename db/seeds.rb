@@ -11,18 +11,18 @@ require 'faker'
 
 account = Account.new(name: "test_account")
 
-owner = User.create(name: "Mr Owner",
-                    email: "owner@test.net",
-                    role: :owner,
-                    account_id: account,
-                    password: "foobar",
-                    password_confirmation: "foobar")
+me = User.create(name: "Robert Carter",
+                 email: "kakulo83@gmail.com",
+                 account_id: account.id,
+                 password: "greekboy",
+                 password_confirmation: "greekboy")
 
-account.owner = owner
-owner.account = account
+
+account.me = me
+me.account = account
 
 account.save
-owner.save
+me.save
 
 10.times do
   password = Faker::Internet.password(min_length = 8)
@@ -53,3 +53,8 @@ admin2 = User.create(name: "Admin2",
 
 BoardMembership.create(user: admin1, board: board)
 BoardMembership.create(user: admin2, board: board)
+
+card1 = Card.create(title: "card thing 1",
+                    description: "get things done",
+                    board: board,
+                    creator: User.last)

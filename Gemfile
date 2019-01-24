@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 4.0'
 gem 'active_model_serializers', '~> 0.10'
 gem 'bcrypt', '~> 3.1.7'
+gem 'rack-cors', require: 'rack/cors'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

@@ -9,7 +9,6 @@
 /vendor/bundle
 
 # Ignore the default SQLite database.
-/db/schema.rb
 /db/*.sqlite3
 /db/*.sqlite3-journal
 dump.rdb
@@ -35,6 +34,6 @@ dump.rdb
 
 public/uploads/
 public/test_assets/
-
+tags
 notes
 todo

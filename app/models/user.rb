@@ -37,4 +37,8 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :user
   end
+
+  def can_modify_resource?
+    self.role == :admin || self.role == :admin
+  end
 end

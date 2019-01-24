@@ -18,4 +18,7 @@ class Board < ApplicationRecord
     through: :board_memberships,
     source: :user
   has_many :users, through: :board_memberships
+  has_many :cards
+
+  accepts_nested_attributes_for :cards
 end
