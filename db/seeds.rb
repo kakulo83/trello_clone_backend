@@ -11,6 +11,13 @@ require 'faker'
 
 account = Account.new(name: "test_account")
 
+owner = User.create(name: "Mr Owner",
+                    email: "owner@test.net",
+                    password: "foobar",
+                    password_confirmation: "foobar")
+
+owner.account = account
+
 me = User.create(name: "Robert Carter",
                  email: "kakulo83@gmail.com",
                  account_id: account.id,
@@ -18,7 +25,6 @@ me = User.create(name: "Robert Carter",
                  password_confirmation: "greekboy")
 
 
-account.me = me
 me.account = account
 
 account.save

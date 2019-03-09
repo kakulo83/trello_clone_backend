@@ -1,6 +1,6 @@
 class Api::V1::BoardsController < Api::V1::BaseController
   def index
-    render json: { boards: Board.all }
+    render json: { boards: @current_user.boards }
   end
 
   def show; end

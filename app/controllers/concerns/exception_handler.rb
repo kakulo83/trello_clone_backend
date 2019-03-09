@@ -31,7 +31,7 @@ module ExceptionHandler
     rescue_from JWT::DecodeError do |e|
       render json: {
         status: 500,
-        error: e.message,
+        error: "Invalid token, #{e.message}",
         code: "jwt_decoding_error"
       }, status: :internal_server_error
     end

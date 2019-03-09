@@ -6,8 +6,12 @@ class JWTUtil
     end
 
     def decode(token)
-      body = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
-      HashWithIndifferentAccess.new body
+      begin
+        body = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
+        HashWithIndifferentAccess.new body
+      rescue JWT::DecodeError
+        raise StandardError
+      end
     end
   end
 end

@@ -6,6 +6,10 @@ class Api::V1::BaseController < ActionController::Base
 
   attr_reader :current_user, :headers
 
+  def check_token
+    render json: :accepted
+  end
+
   private
 
   def authenticate_request
