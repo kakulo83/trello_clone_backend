@@ -29,11 +29,19 @@ module ExceptionHandler
     end
 
     rescue_from JWT::DecodeError do |e|
-      render json: {
-        status: 500,
-        error: "Invalid token, #{e.message}",
-        code: "jwt_decoding_error"
-      }, status: :internal_server_error
+      if e.exception.class == JWT::ExpiredSignature
+        render json: {
+          status: 401,
+          error: "Invalid token, #{e.message}",
+          code: "unauthorized"
+        }, status: :unauthorized
+      else
+        render json: {
+          status: 500,
+          error: "Invalid token, #{e.message}",
+          code: "jwt_decoding_error"
+        }, status: :internal_server_error
+      end
     end
 
     rescue_from AuthorizationHeaderMissing do |e|

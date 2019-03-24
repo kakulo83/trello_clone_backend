@@ -21,13 +21,17 @@ RSpec.describe Board, type: :model do
                           password: "foobar",
                           password_confirmation: "foobar") }
 
-  subject(:board) { Board.create(name: "todo", account: @account) }
+  subject(:board) { Board.create(title: "todo", account: @account) }
 
   it { should belong_to(:account) }
 
   it { should have_many(:board_memberships) }
 
-  it "has a name", board: true do
-    expect(subject.name).to eq("todo")
+  it { should have_many(:decks) }
+
+  it { should have_many(:cards) }
+
+  it "has a title", board: true do
+    expect(subject.title).to eq("todo")
   end
 end

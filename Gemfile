@@ -25,6 +25,7 @@ gem 'rack-cors', require: 'rack/cors'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'acts_as_list'
 
 group :development, :test do
   gem 'pry-byebug', '~>3.6'
@@ -47,6 +48,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'faker', '1.9.1'
   gem 'pry-rails', '~> 0.3.8'
   gem 'rspec-rails', '~> 3.8'

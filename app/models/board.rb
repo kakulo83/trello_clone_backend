@@ -3,7 +3,7 @@
 # Table name: boards
 #
 #  id         :bigint(8)        not null, primary key
-#  name       :string
+#  title      :string
 #  account_id :bigint(8)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -18,7 +18,8 @@ class Board < ApplicationRecord
     through: :board_memberships,
     source: :user
   has_many :users, through: :board_memberships
-  has_many :cards
+  has_many :decks
+  has_many :cards, through: :decks
 
   accepts_nested_attributes_for :cards
 end

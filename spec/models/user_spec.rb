@@ -26,6 +26,10 @@ RSpec.describe User, type: :model do
                                  password: "foobar",
                                  password_confirmation: "foobar") }
 
+    it { should belong_to(:account) }
+    it { should have_many(:boards) }
+    it { should have_many(:comments) }
+
     it "name should be present" do
       expect(subject.name).to eq("Mr User")
     end
@@ -33,9 +37,6 @@ RSpec.describe User, type: :model do
     it "email should be present" do
       expect(subject.email).to eq("user@test.net")
     end
-
-    it { should belong_to(:account) }
-    it { should have_many(:boards) }
 
     it "has names that are not too short" do
       user.name = "feeder" * 10
@@ -73,7 +74,9 @@ RSpec.describe User, type: :model do
   end
 
   describe "when the User is not an Owner or Admin" do
-    subject(:user) { User.create(name: "Mr User", email: "user@test.net", account_id: account.id ) }
+    subject(:user) { create(:user) }
+    # subject(:user) { create(:user, role: :owner) }
+    # subject(:user) { User.create(name: "Mr User", email: "user@test.net", account_id: account.id ) }
 
     it "is not an admin or owner", :aggregate_failures do
       expect(subject.admin?).to be_falsey

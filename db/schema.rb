@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_05_212118) do
+ActiveRecord::Schema.define(version: 2019_03_24_203729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_01_05_212118) do
   end
 
   create_table "boards", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,10 +41,31 @@ ActiveRecord::Schema.define(version: 2019_01_05_212118) do
   create_table "cards", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "board_id"
+    t.integer "deck_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "text"
+    t.bigint "user_id"
+    t.bigint "card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_comments_on_card_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "decks", force: :cascade do |t|
+    t.bigint "board_id"
+    t.string "title"
+    t.integer "position"
+    t.boolean "archived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_decks_on_board_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +81,7 @@ ActiveRecord::Schema.define(version: 2019_01_05_212118) do
   end
 
   add_foreign_key "boards", "accounts"
+  add_foreign_key "comments", "cards"
+  add_foreign_key "comments", "users"
+  add_foreign_key "decks", "boards"
 end
