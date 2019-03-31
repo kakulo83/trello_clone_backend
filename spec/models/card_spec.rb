@@ -16,8 +16,6 @@ require 'rails_helper'
 
 RSpec.describe Card, type: :model do
   it { should belong_to(:deck) }
-
   it { should have_many(:comments) }
-
 	it { should belong_to(:creator) }
 end

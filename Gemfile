@@ -49,7 +49,7 @@ end
 
 group :development, :test do
   gem 'factory_bot_rails'
-  gem 'faker', '1.9.1'
+  gem 'faker', '1.9.3'
   gem 'pry-rails', '~> 0.3.8'
   gem 'rspec-rails', '~> 3.8'
 end

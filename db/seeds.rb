@@ -50,7 +50,7 @@ end
 # CREATE BOARD
 board = Board.create(title: "Home duties", account: account)
 
-deck1 = Deck.create(title: "todos", board: board, position: 1, archived: false)
+deck1 = Deck.create(title: "todos", board: board, position: 1)
 
 card1 = Card.create(title: "Buy some drugs",
                     description: "get things done",

@@ -4,7 +4,6 @@ class CreateDecks < ActiveRecord::Migration[5.2]
       t.references :board, foreign_key: true
       t.string :title
       t.integer :position
-      t.boolean :archived, default: false
 
       t.timestamps
     end

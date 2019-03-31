@@ -20,22 +20,19 @@ RSpec.describe User, type: :model do
   let(:account) { Account.create(name: "test_account") }
 
   context "all users" do
-    subject(:user) { User.create(name: "Mr User",
-                                 email: "user@test.net",
-                                 account_id: account.id,
-                                 password: "foobar",
-                                 password_confirmation: "foobar") }
+
+    subject(:user) { create(:user) }
 
     it { should belong_to(:account) }
     it { should have_many(:boards) }
     it { should have_many(:comments) }
 
     it "name should be present" do
-      expect(subject.name).to eq("Mr User")
+      expect(subject.name).not_to be_empty
     end
 
     it "email should be present" do
-      expect(subject.email).to eq("user@test.net")
+      expect(subject.email).not_to be_empty
     end
 
     it "has names that are not too short" do
@@ -75,8 +72,6 @@ RSpec.describe User, type: :model do
 
   describe "when the User is not an Owner or Admin" do
     subject(:user) { create(:user) }
-    # subject(:user) { create(:user, role: :owner) }
-    # subject(:user) { User.create(name: "Mr User", email: "user@test.net", account_id: account.id ) }
 
     it "is not an admin or owner", :aggregate_failures do
       expect(subject.admin?).to be_falsey
@@ -86,7 +81,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "when the user is an Owner" do
-    subject(:owner) { User.create(name: "Mr Owner", email: "owner@test.net", account_id: account.id, role: :owner) }
+    subject(:owner) { create(:user, :owner) }
 
     it "is an owner" do
       expect(subject.owner?).to be true
@@ -94,6 +89,10 @@ RSpec.describe User, type: :model do
   end
 
   describe "when the user is an Admin" do
-    pending "add some specs"
+    subject(:admin) { create(:user, :admin) }
+
+    it "is an admin" do
+      expect(subject.admin?).to be true
+    end
   end
 end

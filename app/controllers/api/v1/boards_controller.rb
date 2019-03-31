@@ -4,8 +4,6 @@ class Api::V1::BoardsController < Api::V1::BaseController
   end
 
   def show
-    # TODO Ensure user is authorized to see this board
-
     if params[:include_cards]
       @board = Board.includes(decks: :cards).find(params[:id])
       render json: @board, include: { decks: { include: :cards }}

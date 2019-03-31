@@ -2,6 +2,7 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   class AuthorizationHeaderMissing < StandardError; end
+  class NoAuthorization < StandardError; end
 
   included do
     rescue_from ActiveRecord::RecordNotFound do |e|
@@ -49,6 +50,14 @@ module ExceptionHandler
         status: 401,
         error: e.message,
         code: "authorization_header_missing"
+      }, status: :unauthorized
+    end
+
+    rescue_from NoAuthorization do |e|
+      render json: {
+        status: 401,
+        error: e.message,
+        code: "authorization_access_to_resource"
       }, status: :unauthorized
     end
   end

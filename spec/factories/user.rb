@@ -1,16 +1,18 @@
 FactoryBot.define do
-  factory :user do
-    account
-    name { "Mr Owner" }
-    email { "owner@test.net" }
+  factory :user, aliases: [:creator] do
+    association :account
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
     role { :user }
     password { "foobar" }
     password_confirmation { "foobar" }
 
-    association
-
     trait :owner do
       role { :owner }
+    end
+
+    trait :admin do
+      role { :admin }
     end
   end
 end

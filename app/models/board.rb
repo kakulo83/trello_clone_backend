@@ -22,4 +22,14 @@ class Board < ApplicationRecord
   has_many :cards, through: :decks
 
   accepts_nested_attributes_for :cards
+
+
+  # https://stackoverflow.com/questions/8186048/rails-scope-find-with-current-user
+  #
+  #  scope :by_user, lambda { |user|
+  #    where(:owner_id => user.id) unless user.admin?
+  #  }
+  #
+  #  MyModel.by_user(current_user).find(params[:id])
+
 end

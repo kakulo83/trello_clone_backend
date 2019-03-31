@@ -5,6 +5,8 @@ class CreateCards < ActiveRecord::Migration[5.2]
       t.string :description
       t.integer :deck_id
       t.integer :user_id
+      t.boolean :archived, default: false
+
       t.timestamps
     end
   end
