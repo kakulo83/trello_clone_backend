@@ -27,10 +27,6 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'acts_as_list'
 
-group :development, :test do
-  gem 'pry-byebug', '~>3.6'
-end
-
 group :development do
   gem 'annotate', '~> 2.7.4'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -48,9 +44,10 @@ group :test do
 end
 
 group :development, :test do
+  gem 'pry-byebug', '~>3.6'
+  gem 'pry-rails', '~> 0.3.8'
   gem 'factory_bot_rails'
   gem 'faker', '1.9.3'
-  gem 'pry-rails', '~> 0.3.8'
   gem 'rspec-rails', '~> 3.8'
 end
 

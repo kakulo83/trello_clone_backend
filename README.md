@@ -21,4 +21,7 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* Other
+
+    When cloning backend, note that original config/master.key (on Desktop Linux) is not included in the repo
+    Without the master.key file, JWT tokens cannot be read/created
