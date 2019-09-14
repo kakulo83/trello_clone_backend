@@ -21,21 +21,19 @@ owner = User.create(name: "Mr Owner",
 owner.account = account
 owner.save
 
-pass1 = Faker::Internet.password(min_length = 8)
 admin1 = User.create(name: "Admin1",
                      email: "admin1@test.net",
                      role: :admin,
                      account: account,
-                     password: pass1,
-                     password_confirmation: pass1)
+                     password: "password",
+                     password_confirmation: "password")
 
-pass2 = Faker::Internet.password(min_length = 8)
 admin2 = User.create(name: "Admin2",
                      email: "admin2@test.net",
                      role: :admin,
                      account: account,
-                     password: pass2,
-                     password_confirmation: pass2)
+                     password: "password",
+                     password_confirmation: "password")
 
 10.times do
   password = Faker::Internet.password(min_length = 8)
